@@ -1,0 +1,76 @@
+name: pylsp
+summary: Python LSP Server
+description: |
+  A Python implementation of the Language Server Protocol.
+
+  See https://github.com/python-lsp/python-lsp-server for details.
+license: MIT
+confinement: strict
+grade: stable
+base: core20
+architectures:
+  - build-on: amd64
+adopt-info: pylsp
+
+apps:
+  pylsp:
+    command: bin/pylsp
+    plugs:
+      - home
+      - network-bind
+  black:
+    command: bin/black
+    plugs:
+      - home
+  flake8:
+    command: bin/flake8
+    plugs:
+      - home
+  isort:
+    command: bin/isort
+    plugs:
+      - home
+  memestra:
+    command: bin/memestra
+    plugs:
+      - home    
+  mypy:
+    command: bin/mypy
+    plugs:
+      - home    
+  pyflakes:
+    command: bin/pyflakes
+    plugs:
+      - home
+  pylint:
+    command: bin/pylint
+    plugs:
+      - home
+  yapf:
+    command: bin/yapf
+    plugs:
+      - home
+
+parts:
+  pylsp:
+    plugin: python
+    source: .
+    source-type: git
+    python-packages:
+      - python-lsp-server[all]
+      - python-lsp-black
+      - pyls-flake8
+      - pyls-isort
+      - pyls-memestra
+      - mypy-ls
+    prime:
+      - bin
+      - lib
+      - pyvenv.cfg
+    override-build: |
+      set -e
+      snapcraftctl build
+      PYLSP_VERSION="$(pip show python-lsp-server | awk '$1 == "Version:" { print $2 }')"
+      GIT_HASH="$(git --work-tree "$SNAPCRAFT_PROJECT_DIR" rev-parse --short HEAD)"
+      snapcraftctl set-version "${PYLSP_VERSION}-snap.${GIT_HASH}"
+      python3 -m compileall -q .
