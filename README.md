@@ -15,7 +15,7 @@ It also includes the following plugins:
 It can be installed from the store via:
 
 ```bash
-    sudo snap install pylsp
+sudo snap install pylsp
 ```
 
 It provides the `pylsp` command and also exposes related tools (`flake8`, `isort`, `mypy`, `pyflakes`, ...).
