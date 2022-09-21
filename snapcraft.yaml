@@ -7,7 +7,7 @@ description: |
 license: MIT
 confinement: strict
 grade: stable
-base: core20
+base: core22
 architectures:
   - build-on: amd64
 adopt-info: pylsp
