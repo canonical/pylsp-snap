@@ -69,9 +69,10 @@ parts:
       - pyvenv.cfg
       - share/memestra
     override-build: |
-      snapcraftctl build
-      PYLSP_VERSION="$(pip show python-lsp-server | awk '$1 == "Version:" { print $2 }')"
-      GIT_HASH="$(git --work-tree "$SNAPCRAFT_PROJECT_DIR" rev-parse --short HEAD)"
-      snapcraftctl set-version "${PYLSP_VERSION}-snap.${GIT_HASH}"
+      craftctl default
       python3 -m compileall -q .
       mkdir -p "$SNAPCRAFT_PART_INSTALL/share/memestra"
+
+      PYLSP_VERSION="$(pip show python-lsp-server | awk '$1 == "Version:" { print $2 }')"
+      GIT_HASH="$(git --work-tree "$SNAPCRAFT_PROJECT_DIR" rev-parse --short HEAD)"
+      craftctl set version="${PYLSP_VERSION}-snap.${GIT_HASH}"
