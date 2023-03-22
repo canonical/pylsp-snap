@@ -62,7 +62,8 @@ parts:
       - pyls-flake8
       - pyls-isort
       - pyls-memestra
-      - mypy-ls
+      - pylsp-mypy
+      - flake8-pyproject
     prime:
       - bin
       - lib

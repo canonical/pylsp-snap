@@ -6,7 +6,7 @@ This snap provides a full installation of [Python LSP Server](https://github.com
 
 It also includes the following plugins:
 
-- `mypy-ls`
+- `pylsp-mypy`
 - `pyls-black`
 - `pyls-flake8`
 - `pyls-isort`
