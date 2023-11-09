@@ -58,6 +58,7 @@ parts:
     source-type: git
     python-packages:
       - python-lsp-server[all]
+      - python-lsp-ruff
       - python-lsp-black
       - pyls-flake8
       - pyls-isort
